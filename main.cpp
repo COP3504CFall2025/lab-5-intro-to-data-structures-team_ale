@@ -1,4 +1,4 @@
-#ifdef MAIN
+//#ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -52,7 +52,7 @@ int main() {
     BB.push(7);
     BB = LL;
     BB.printForward();
-    std::cout << "This: " << BB.front() << " " << LL.back() << " " << BB.front() << '\n';
+    std::cout << "This: " << BB.peek() << " " << LL.peek() << " " << BB.peek() << '\n';
     ABS<int> CC = BB;
     CC.printForward();
     std::cout << "Hello" <<'\n';
@@ -63,4 +63,4 @@ int main() {
     return 0;
 }
 
-#endif
+//#endif

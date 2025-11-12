@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <iostream>
 #include "Interfaces.hpp"
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
@@ -11,7 +12,7 @@ template<typename T>
 class ABS : public StackInterface<T> {
 public:
     // Big 5 + Parameterized Constructor
-    ABS(): capacity_(1), curr_size_(0), array_(new T){}
+    ABS(): capacity_(1), curr_size_(0), array_(new T[capacity_]){}
     explicit ABS(const size_t capacity): capacity_(capacity_), curr_size_(0), array_(new T[capacity_]){}
     ABS(const ABS& other) {
         array_ = new T[other.capacity_];
@@ -31,12 +32,13 @@ public:
         }
         capacity_ = rhs.capacity_;
         curr_size_ = rhs.curr_size_;
+        return *this;
     }
     ABS(ABS&& other) noexcept{
         array_ = other.array_;
         curr_size_ = other.curr_size_;
         capacity_ = other.capacity_;
-        other.array = nullptr;
+        other.array_ = nullptr;
         other.curr_size_ = 0;
         other.capacity_ = 0;
 
@@ -50,6 +52,7 @@ public:
         rhs.array = nullptr;
         rhs.curr_size_ = 0;
         rhs.capacity_ = 0;
+        return *this;
     }
     ~ABS() noexcept override{
         delete[] array_;
@@ -101,14 +104,25 @@ public:
 
     T pop() override{
         curr_size_--;
+        T val = array_[curr_size_ - 1];
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_ - 1; i++){
             temp[i] = array_[i + 1];
         }
         delete[] array_;
         array_ = temp;
+        return val;
     }
-
+    void printForward(){
+        for (size_t i = 0; i < curr_size_; i++){
+            std::cout << array_[i] << std::endl;
+        }
+    }
+    void printReverse(){
+        for (size_t i = curr_size_; i >= 1; i--){
+            std::cout << array_[i - 1] << std::endl;
+        }
+    }
 private:
     size_t capacity_;
     size_t curr_size_;

@@ -17,7 +17,7 @@ class ABQ : public QueueInterface<T>{
 
 public:
     // Constructors + Big 5
-    ABQ(): capacity_(1), curr_size_(0), array_(new T){}
+    ABQ(): capacity_(1), curr_size_(0), array_(new T[capacity_]){}
     explicit ABQ(const size_t capacity): capacity_(capacity_), curr_size_(0), array_(new T[capacity_]){}
     ABQ(const ABQ& other) {
         array_ = new T[other.capacity_];
@@ -37,6 +37,7 @@ public:
         }
         capacity_ = rhs.capacity_;
         curr_size_ = rhs.curr_size_;
+        return *this;
     }
     ABQ(ABQ&& other) noexcept{
         array_ = other.array_;
@@ -56,6 +57,7 @@ public:
         rhs.array = nullptr;
         rhs.curr_size_ = 0;
         rhs.capacity_ = 0;
+        return *this;
     }
     ~ABQ() noexcept override{
         delete[] array_;
@@ -98,13 +100,25 @@ public:
     // Deletion
     T dequeue() override{
         curr_size_--;
+        T val = array_[curr_size_ - 1];
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_ - 1; i++){
             temp[i] = array_[i + 1];
         }
         delete[] array_;
         array_ = temp;
+        return val;
         
+    }
+    void printForward(){
+        for (size_t i = 0; i < curr_size_; i++){
+            std::cout << array_[i] << std::endl;
+        }
+    }
+    void printReverse(){
+        for (size_t i = curr_size_; i >= 1; i--){
+            std::cout << array_[i-1] << std::endl;
+        }
     }
 
 };

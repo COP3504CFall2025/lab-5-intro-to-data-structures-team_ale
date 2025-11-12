@@ -103,6 +103,9 @@ public:
     }
 
     T pop() override{
+        try{
+            if (curr_size_ = 0) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         curr_size_--;
         T val = array_[curr_size_ - 1];
         T* temp = new T[capacity_];

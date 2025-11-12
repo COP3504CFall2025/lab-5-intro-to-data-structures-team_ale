@@ -19,10 +19,48 @@
 */
 
 int main() {
+    // int* tmp = new int(7);
+    // int*arr = new int(8);
+    // arr[0] = *(tmp);
+    // std::cout << *tmp << " " << *arr << '\n';
+    // delete tmp;
+
+    ABS<int> LL{};
+    LL.push(3);
+    LL.push(4);
+    LL.push(2);
+    LL.push(4);
+    LL.push(7);
+    LL.pop();
+    LL.pop();
+    LL.printForward();
+    ABS<int> FF{};
+    LL.push(45);
+    LL.push(12);
+    LL.push(3);
+    LL.push(11);
+    LL.push(74);
+    LL.pop();
+    LL.pop();
+    LL.printForward();
+    std::cout << "Hello" << " " << LL.getSize() <<'\n';
+    ABS<int> BB{};
+    BB.push(4);
+    BB.push(6);
+    BB.push(3);
+    BB.push(9);
+    BB.push(7);
+    BB = LL;
+    BB.printForward();
+    std::cout << "This: " << BB.front() << " " << LL.back() << " " << BB.front() << '\n';
+    ABS<int> CC = BB;
+    CC.printForward();
+    std::cout << "Hello" <<'\n';
+    ABS<int> DD = std::move(CC);
+    DD.printReverse();
 
 
     return 0;
 }
-
 
 #endif

@@ -106,9 +106,9 @@ public:
 
     // Deletion
     T popFront() override{
-        try{
-            if (back_ == front_) throw std::out_of_range("Empty Array");
-        }catch(std::out_of_range& error){}
+        if (back_ == front_){
+            throw std::out_of_range("Empty Array");
+        }
         T val = data_[front_];
         front_ = (front_ + 1) % capacity_;
         size_--;
@@ -117,9 +117,9 @@ public:
         
     }
     T popBack() override{
-        try{
-            if (back_ == front_) throw std::out_of_range("Empty Array");
-        }catch(std::out_of_range& error){}
+        if (back_ == front_){
+            throw std::out_of_range("Empty Array");
+        }
         T val = data_[back_];
         back_ = (back_ - 1 + capacity_) % capacity_;
         size_--;
@@ -130,15 +130,15 @@ public:
 
     // Access
     const T& front() const override{
-        try{
-            if (back_ == front_) throw std::out_of_range("Empty Array");
-        }catch(std::out_of_range& error){}
+        if (back_ == front_){
+            throw std::out_of_range("Empty Array");
+        }
         return data_[front_];
     }
     const T& back() const override{
-        try{
-            if (back_ == front_) throw std::out_of_range("Empty Array");
-        }catch(std::out_of_range& error){}
+        if (back_ == front_){
+            throw std::out_of_range("Empty Array");
+        }
         return data_[back_];
     }
 

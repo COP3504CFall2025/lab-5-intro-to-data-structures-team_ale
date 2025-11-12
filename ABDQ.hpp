@@ -8,9 +8,9 @@
 
 template <typename T>
 class ABDQ : public DequeInterface<T> {
-private:
-    T* data_;                 // underlying dynamic data_
-    std::size_t capacity_;    // total allocated capacity
+private:                 // underlying dynamic data_
+    std::size_t capacity_; 
+    T* data_;    // total allocated capacity
     std::size_t size_;        // number of stored elements
     std::size_t front_;       // index of front element
     std::size_t back_;        // index after the last element (circular)
@@ -19,7 +19,7 @@ private:
 
 public:
     // Big 5
-    ABDQ(): data_(new T[4]), capacity_(4), size_(0), front_(0), back_(0){}
+    ABDQ():  capacity_(4), data_(new T[4]), size_(0), front_(0), back_(0){}
     explicit ABDQ(std::size_t capacity): capacity_(capacity), data_(new T[capacity_]), size_(0), front_(0), back_(0){}
     ABDQ(const ABDQ& other) {
         data_ = new T[other.capacity_];
@@ -107,8 +107,8 @@ public:
     // Deletion
     T popFront() override{
         try{
-            if (back_ == front_) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+            if (back_ == front_) throw std::out_of_range("Empty Array");
+        }catch(std::out_of_range& error){}
         T val = data_[front_];
         front_ = (front_ + 1) % capacity_;
         size_--;
@@ -118,8 +118,8 @@ public:
     }
     T popBack() override{
         try{
-            if (back_ == front_) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+            if (back_ == front_) throw std::out_of_range("Empty Array");
+        }catch(std::out_of_range& error){}
         T val = data_[back_];
         back_ = (back_ - 1 + capacity_) % capacity_;
         size_--;
@@ -131,14 +131,14 @@ public:
     // Access
     const T& front() const override{
         try{
-            if (back_ == front_) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+            if (back_ == front_) throw std::out_of_range("Empty Array");
+        }catch(std::out_of_range& error){}
         return data_[front_];
     }
     const T& back() const override{
         try{
-            if (back_ == front_) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+            if (back_ == front_) throw std::out_of_range("Empty Array");
+        }catch(std::out_of_range& error){}
         return data_[back_];
     }
 

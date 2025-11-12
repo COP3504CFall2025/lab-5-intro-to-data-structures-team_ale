@@ -27,11 +27,17 @@ public:
 
     // Core Removal Operations
     T popFront() override{
+        try{
+            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         T front = list.getHead()->val;
         list.removeHead();
         return front;
     }
     T popBack() override{
+        try{
+            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         T back = list.getTail()->val;
         list.removeTail();
         return back;
@@ -39,9 +45,15 @@ public:
 
     // Element Accessors
     const T& front() const override{
+        try{
+            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         return list.getHead()->val;
     }
     const T& back() const override{
+        try{
+            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         return list.getTail()->val;
     }
 

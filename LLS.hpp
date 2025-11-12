@@ -19,6 +19,9 @@ public:
     }
     // Deletion
     T pop() override{
+        try{
+            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         T val = list.getHead()->val;
         list.removeHead();
         return val;

@@ -20,6 +20,9 @@ public:
 
     // Deletion
     T dequeue() override{
+        try{
+            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        }catch(std::runtime_error& error){}
         T val = list.getTail()->val;
         list.removeTail();
         return val;

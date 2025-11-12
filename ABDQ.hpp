@@ -19,8 +19,8 @@ private:
 
 public:
     // Big 5
-    ABDQ(): data_(new T[capacity_]), capacity_(4), size_(0), front_(0), back_(0){}
-    explicit ABDQ(std::size_t capacity): data_(new T[capacity_]), capacity_(capacity), size_(0), front_(0), back_(0){}
+    ABDQ(): data_(new T[4]), capacity_(4), size_(0), front_(0), back_(0){}
+    explicit ABDQ(std::size_t capacity): capacity_(capacity), data_(new T[capacity_]), size_(0), front_(0), back_(0){}
     ABDQ(const ABDQ& other) {
         data_ = new T[other.capacity_];
         for (size_t i = 0; i < other.size_; i++){

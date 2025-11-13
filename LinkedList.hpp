@@ -84,7 +84,7 @@ public:
 	// Removal
 	void removeHead(){
 		try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+            if (head == nullptr) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
 		if (count == 1){
 			delete head;
@@ -100,7 +100,7 @@ public:
 	}
 	void removeTail(){
 		try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+            if (tail == nullptr) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
 		if (count == 1){
 			delete tail;

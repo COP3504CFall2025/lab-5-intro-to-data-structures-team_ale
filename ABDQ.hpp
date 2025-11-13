@@ -8,9 +8,9 @@
 
 template <typename T>
 class ABDQ : public DequeInterface<T> {
-private:                 // underlying dynamic data_
-    std::size_t capacity_; 
-    T* data_;    // total allocated capacity
+private:                 
+    T* data_;// underlying dynamic data_
+    std::size_t capacity_;     // total allocated capacity
     std::size_t size_;        // number of stored elements
     std::size_t front_;       // index of front element
     std::size_t back_;        // index after the last element (circular)
@@ -23,9 +23,11 @@ public:
     explicit ABDQ(std::size_t capacity): data_(new T[capacity]), capacity_(capacity), size_(0), front_(0), back_(0){}
     ABDQ(const ABDQ& other) {
         data_ = new T[other.capacity_];
-        for (size_t i = 0; i < other.size_; i++){
+        for (std::size_t i = 0; i < other.size_; i++){
             data_[i] = other.data_[i];
         }
+        front_ = other.front_;
+        back_ = other.back_;
         capacity_ = other.capacity_;
         size_ = other.size_;
 
@@ -34,9 +36,11 @@ public:
         if (this == &other) return *this;
         delete[] data_;
         data_ = new T[other.capacity_];
-        for (size_t i = 0; i < other.size_; i++){
-            data_[i] = other.data_[i];
+        for (std::size_t i = front_; i < front_ + size_ ; i++){
+            data_[i % other.capacity_] = other.data_[i % other.capacity_];
         }
+        front_ = other.front_;
+        back_ = other.back_;
         capacity_ = other.capacity_;
         size_ = other.size_;
         return *this;
@@ -44,10 +48,15 @@ public:
     ABDQ(ABDQ&& other) noexcept{
         data_ = other.data_;
         size_ = other.size_;
+        front_ = other.front_;
+        back_ = other.back_;
         capacity_ = other.capacity_;
         other.data_ = nullptr;
         other.size_ = 0;
         other.capacity_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
+
 
     }
     ABDQ& operator=(ABDQ&& other) noexcept{
@@ -59,48 +68,53 @@ public:
         other.data_ = nullptr;
         other.size_ = 0;
         other.capacity_ = 0;
+        other.front_ = 0;
+        other.back_ = 0;
         return *this;
     }
     ~ABDQ() noexcept override{
         delete[] data_;
         size_ = 0;
         capacity_ = 0;
+        front_ = 0;
+        back_ = 0;
 
     }
 
     // Insertion
     void ensureCapacity(){
-        capacity_ *= SCALE_FACTOR;
-        T* temp = new T[capacity_];
-        for (size_t i = 0; i < size_; i++){
-            temp[i] = data_[i];
+        std::size_t newCap = capacity_ * SCALE_FACTOR;
+        T* temp = new T[newCap];
+        for (std::size_t i = front_; i < front_ + size_ ; i++){
+            temp[i % newCap] = data_[i % capacity_];
         }
         delete[] data_;
         data_ = temp;
-        front_ = 0;
-        back_ = size_  - 1;
+        capacity_ = newCap;
+        back_ = (front_ + size_) % capacity_;
     }
     void shrinkIfNeeded(){
-        capacity_ /= SCALE_FACTOR;
-        T* temp = new T[capacity_];
-        for (size_t i = 0; i < size_; i++){
-            temp[i] = data_[i];
+        std::size_t newCap = capacity_ / SCALE_FACTOR;
+        T* temp = new T[newCap];
+        for (std::size_t i = front_; i < front_ + size_; i++){
+            temp[i % newCap] = data_[i % capacity_];
         }
         delete[] data_;
         data_ = temp;
-        front_ = 0;
-        back_ = size_ - 1;
+        capacity_ = newCap;
+        front_  %= capacity_;
+        back_ = (front_ + size_) % capacity_;
     }
     void pushFront(const T& item) override{
+        if (size_ == capacity_) ensureCapacity();
         front_ = (front_ - 1 + capacity_) % capacity_;
-        if (front_ == back_) ensureCapacity();
         data_[front_] = item;
         size_++;
     }
     void pushBack(const T& item) override{
-        back_ = (back_ + 1) % capacity_;
-        if (front_ == back_) ensureCapacity();
+        if (size_ == capacity_) ensureCapacity();
         data_[back_] = item;
+        back_ = (back_ + 1) % capacity_;
         size_++;
     }
 
@@ -112,7 +126,7 @@ public:
         T val = data_[front_];
         front_ = (front_ + 1) % capacity_;
         size_--;
-        if (size_ == capacity_ / 2) shrinkIfNeeded();
+        if (size_ == (capacity_ / 2) - 1) shrinkIfNeeded();
         return val;
         
     }
@@ -123,7 +137,7 @@ public:
         T val = data_[back_];
         back_ = (back_ - 1 + capacity_) % capacity_;
         size_--;
-        if (size_ == capacity_ / 2) shrinkIfNeeded();
+        if (size_ == (capacity_ / 2) - 1) shrinkIfNeeded();
         return val;
 
     }
@@ -139,7 +153,7 @@ public:
         if (back_ == front_){
             throw std::out_of_range("Empty Array");
         }
-        return data_[back_];
+        return data_[back_ - 1];
     }
 
     // Getters
@@ -147,14 +161,20 @@ public:
         return size_;
     }
     void printForward(){
-        for (size_t i = front_; i < size_ + front_; i++){
+        for (std::size_t i = front_; i < size_ + front_; i++){
             std::cout << data_[i % capacity_] << std::endl;
         }
     }
     void printReverse(){
-        for (size_t i = back_; i >= front_; i--){
+        std::size_t i = back_ - 1;
+        std::size_t count = 0;
+        while(i != front_){
             std::cout << data_[(i + capacity_) % capacity_] << std::endl;
+            i = (i - 1) % capacity_;
+            count++;
         }
+        std::cout << data_[front_] << std::endl;
+
     }
 
 };

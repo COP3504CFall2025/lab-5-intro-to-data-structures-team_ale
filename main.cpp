@@ -1,4 +1,4 @@
-#ifdef MAIN
+//#ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -25,42 +25,46 @@ int main() {
     // std::cout << *tmp << " " << *arr << '\n';
     // delete tmp;
 
-    ABS<int> LL{};
-    LL.push(3);
-    LL.push(4);
-    LL.push(2);
-    LL.push(4);
-    LL.push(7);
-    LL.pop();
-    LL.pop();
+    ABDQ<int> LL{};
+    LL.pushBack(3);
+    LL.pushFront(4);
+    LL.pushFront(2);
+    LL.pushBack(4);
+    LL.pushBack(5);
+    LL.pushBack(7);
+    LL.popBack();
+    LL.popFront();
+    LL.popFront();
+
     LL.printForward();
-    ABS<int> FF{};
-    LL.push(45);
-    LL.push(12);
-    LL.push(3);
-    LL.push(11);
-    LL.push(74);
-    LL.pop();
-    LL.pop();
-    LL.printForward();
+    ABDQ<int> FF{};
+    FF.pushFront(45);
+    FF.pushFront(12);
+    FF.pushBack(3);
+    FF.pushBack(11);
+    FF.pushBack(74);
+    FF.popFront();
+    FF.popBack();
+    FF.printForward();
     std::cout << "Hello" << " " << LL.getSize() <<'\n';
-    ABS<int> BB{};
-    BB.push(4);
-    BB.push(6);
-    BB.push(3);
-    BB.push(9);
-    BB.push(7);
+    ABDQ<int> BB{};
+    BB.pushFront(4);
+    BB.pushFront(6);
+    BB.pushFront(3);
+    BB.pushFront(9);
+    BB.pushFront(7);
     BB = LL;
     BB.printForward();
-    std::cout << "This: " << BB.peek() << " " << LL.peek() << " " << BB.peek() << '\n';
-    ABS<int> CC = BB;
+     std::cout << "This: " << LL.front() << " " << LL.back() << " " << '\n';
+    std::cout << "This: " << BB.front() << " " << LL.back() << " " <<  '\n';
+    ABDQ<int> CC = BB;
     CC.printForward();
     std::cout << "Hello" <<'\n';
-    ABS<int> DD = std::move(CC);
+    ABDQ<int> DD = std::move(CC);
     DD.printReverse();
 
 
     return 0;
 }
 
-#endif
+//#endif

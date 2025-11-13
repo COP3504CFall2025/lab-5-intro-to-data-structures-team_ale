@@ -121,7 +121,7 @@ public:
     T pop() override{
         if (curr_size_ == 0) throw std::runtime_error("Empty Array");
         if (curr_size_ == capacity_ / 2) shrink();
-        //T val = array_[curr_size_ - 1];
+        T val = array_[0];
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_ - 1; i++){
             temp[i] = array_[i];
@@ -129,7 +129,7 @@ public:
         delete[] array_;
         array_ = temp;
         curr_size_--;
-        return array_[curr_size_ - 1];
+        return val;
     }
     void printForward(){
         for (size_t i = 0; i < curr_size_; i++){

@@ -103,9 +103,6 @@ public:
 		return true;
 	}
 	void clear(){
-		if (head == nullptr){
-			return;
-		}
 		Node* temp_ptr = head;
 		while (temp_ptr != nullptr){
 			Node* tempy = temp_ptr->next;

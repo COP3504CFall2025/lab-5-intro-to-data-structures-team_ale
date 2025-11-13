@@ -41,15 +41,11 @@ public:
 
     // Element Accessors
     const T& front() const override{
-        try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+        if (list.getHead() == nullptr) throw std::runtime_error("Empty Array");
         return list.getHead()->data;
     }
     const T& back() const override{
-        try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+        if (list.getTail() == nullptr) throw std::runtime_error("Empty Array");
         return list.getTail()->data;
     }
 

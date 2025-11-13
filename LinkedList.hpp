@@ -84,12 +84,6 @@ public:
 	// Remodata
 	bool removeHead(){
 		if (head == nullptr) return false;
-		if (count == 1){
-			delete head;
-			head = nullptr;
-			delete tail;
-			tail = nullptr;
-		}
 		Node* tmp_ptr = head;
 		head = head->next;
 		if (head != nullptr) head->prev = nullptr;

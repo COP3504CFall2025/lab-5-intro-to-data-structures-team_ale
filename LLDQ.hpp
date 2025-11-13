@@ -27,15 +27,13 @@ public:
 
     // Core Remodata Operations
     T popFront() override{
-        if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        if (list.getHead() == nullptr) throw std::runtime_error("Empty Array");
         T front = list.getHead()->data;
         list.removeHead();
         return front;
     }
     T popBack() override{
-        try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+        if (list.getTail() == nullptr) throw std::runtime_error("Empty Array");
         T back = list.getTail()->data;
         list.removeTail();
         return back;

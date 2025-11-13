@@ -129,7 +129,7 @@ public:
         delete[] array_;
         array_ = temp;
         curr_size_--;
-        return array_[0];
+        return array_[curr_size_ - 1];
     }
     void printForward(){
         for (size_t i = 0; i < curr_size_; i++){

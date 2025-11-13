@@ -23,8 +23,8 @@ public:
     explicit ABDQ(std::size_t capacity): data_(new T[capacity]), capacity_(capacity), size_(0), front_(0), back_(0){}
     ABDQ(const ABDQ& other) {
         data_ = new T[other.capacity_];
-        for (std::size_t i = 0; i < other.size_; i++){
-            data_[i] = other.data_[i];
+        for (std::size_t i = front_; i < front_ + size_ ; i++){
+            data_[i % other.capacity_] = other.data_[i % other.capacity_];
         }
         front_ = other.front_;
         back_ = other.back_;

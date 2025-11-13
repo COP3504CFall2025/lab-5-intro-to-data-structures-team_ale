@@ -1,4 +1,4 @@
-//#ifdef MAIN
+#ifdef MAIN
 
 #include "ABDQ.hpp"
 #include "ABQ.hpp"
@@ -26,6 +26,11 @@ int main() {
     // delete tmp;
 
     ABDQ<int> LL{};
+    LLQ<int> RR{};
+    LLS<int> WW{};
+    LLDQ<int> OO{};
+    ABS<int> EE{};
+    ABQ<int> QQ{};
     LL.pushBack(3);
     LL.pushFront(4);
     LL.pushFront(2);
@@ -56,7 +61,7 @@ int main() {
     BB = LL;
     BB.printForward();
      std::cout << "This: " << LL.front() << " " << LL.back() << " " << '\n';
-    std::cout << "This: " << BB.front() << " " << LL.back() << " " <<  '\n';
+    std::cout << "That: " << BB.front() << " " << LL.back() << " " <<  '\n';
     ABDQ<int> CC = BB;
     CC.printForward();
     std::cout << "Hello" <<'\n';
@@ -67,4 +72,4 @@ int main() {
     return 0;
 }
 
-//#endif
+#endif

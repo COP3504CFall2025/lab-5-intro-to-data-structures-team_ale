@@ -13,7 +13,7 @@ class ABS : public StackInterface<T> {
 public:
     // Big 5 + Parameterized Constructor
     ABS(): capacity_(1), curr_size_(0), array_(new T[capacity_]){}
-    explicit ABS(const size_t capacity): capacity_(capacity_), curr_size_(0), array_(new T[capacity_]){}
+    explicit ABS(const size_t capacity): capacity_(capacity), curr_size_(0), array_(new T[capacity]){}
     ABS(const ABS& other) {
         array_ = new T[other.capacity_];
         for (size_t i = 0; i < other.curr_size_; i++){
@@ -44,12 +44,12 @@ public:
 
     }
     ABS& operator=(ABS&& rhs) noexcept{
-        if (this = &rhs) return *this;
+        if (this == &rhs) return *this;
         delete[] array_;
         array_ = rhs.array_;
         curr_size_ = rhs.curr_size_;
         capacity_ = rhs.capacity_;
-        rhs.array = nullptr;
+        rhs.array_ = nullptr;
         rhs.curr_size_ = 0;
         rhs.capacity_ = 0;
         return *this;
@@ -104,8 +104,8 @@ public:
 
     T pop() override{
         try{
-            if (curr_size_ = 0) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+            if (curr_size_ == 0) throw std::out_of_range("Empty Array");
+        }catch(std::out_of_range& error){}
         curr_size_--;
         T val = array_[curr_size_ - 1];
         T* temp = new T[capacity_];

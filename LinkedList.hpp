@@ -82,10 +82,8 @@ public:
 	}
 
 	// Remodata
-	void removeHead(){
-		try{
-            if (head == nullptr) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+	bool removeHead(){
+		if (head == nullptr) return false;
 		if (count == 1){
 			delete head;
 			head = nullptr;
@@ -97,11 +95,10 @@ public:
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;
+		return true;
 	}
-	void removeTail(){
-		try{
-            if (tail == nullptr) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+	bool removeTail(){
+		if (tail == nullptr) return false;
 		if (count == 1){
 			delete tail;
 			head = nullptr;
@@ -113,6 +110,7 @@ public:
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;
+		return true;
 	}
 	void Clear(){
 		if (head == nullptr){

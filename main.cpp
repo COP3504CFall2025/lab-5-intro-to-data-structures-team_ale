@@ -1,4 +1,4 @@
-//#ifdef MAIN
+#ifdef MAIN
 
 #include "ABS.hpp"
 #include "ABQ.hpp"
@@ -71,4 +71,4 @@ int main() {
     return 0;
 }
 
-//#endif
+#endif

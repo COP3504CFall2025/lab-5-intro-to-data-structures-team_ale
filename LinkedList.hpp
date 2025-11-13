@@ -55,29 +55,21 @@ public:
 	void addHead(const T& data){
 		Node* tmp_ptr = new Node();
 		tmp_ptr->data = data;
-		if (head == nullptr){
-			head = tmp_ptr;
-			tail = tmp_ptr;
-		}else{
-			head->prev = tmp_ptr;
-			tmp_ptr->next = head;
-			tmp_ptr->prev = nullptr;
-			head = tmp_ptr;
-		}
+		tmp_ptr->next = head;
+		tmp_ptr->prev = nullptr;
+		if (head != nullptr) head->prev = tmp_ptr;
+		else tail = tmp_ptr;
+		head = tmp_ptr;
 		count++;
 	}
 	void addTail(const T& data){
 		Node* tmp_ptr = new Node();
 		tmp_ptr->data = data;
-		if (tail == nullptr){
-			head = tmp_ptr;
-			tail = tmp_ptr;
-		}else{
-			tail->next = tmp_ptr;
-			tmp_ptr->prev = tail;
-			tmp_ptr->next = nullptr;
-			tail = tmp_ptr;
-		}
+		tmp_ptr->prev = tail;
+		tmp_ptr->next = nullptr;
+		if (head != nullptr) tail->next = tmp_ptr;
+		else tail = tmp_ptr;
+		tail = tmp_ptr;
 		count++;
 	}
 

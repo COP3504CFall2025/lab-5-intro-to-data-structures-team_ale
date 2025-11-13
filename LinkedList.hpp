@@ -87,12 +87,12 @@ public:
 		if (count == 1){
 			delete head;
 			head = nullptr;
+			delete tail;
 			tail = nullptr;
 		}
 		Node* tmp_ptr = head;
 		head = head->next;
-		delete head->prev;
-		head = nullptr;
+		if (head != nullptr) head->prev = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;
@@ -100,14 +100,9 @@ public:
 	}
 	bool removeTail(){
 		if (tail == nullptr) return false;
-		if (count == 1){
-			delete tail;
-			head = nullptr;
-			tail = nullptr;
-		}
 		Node* tmp_ptr = tail;
 		tail = tail->prev;
-		tail->next = nullptr;
+		if (tail != nullptr) tail->next = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;

@@ -67,8 +67,8 @@ public:
 		tmp_ptr->data = data;
 		tmp_ptr->prev = tail;
 		tmp_ptr->next = nullptr;
-		if (head != nullptr) tail->next = tmp_ptr;
-		else tail = tmp_ptr;
+		if (tail != nullptr) tail->next = tmp_ptr;
+		else head = tmp_ptr;
 		tail = tmp_ptr;
 		count++;
 	}

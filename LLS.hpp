@@ -22,14 +22,14 @@ public:
         try{
             if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
-        T val = list.getHead()->val;
+        T data = list.getHead()->data;
         list.removeHead();
-        return val;
+        return data;
     }
 
     // Access
     T peek() const override{
-        return list.getHead()->val;
+        return list.getHead()->data;
     }
 
     //Getters

@@ -25,12 +25,12 @@ public:
         list.addTail(item);
     }
 
-    // Core Removal Operations
+    // Core Remodata Operations
     T popFront() override{
         try{
             if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
-        T front = list.getHead()->val;
+        T front = list.getHead()->data;
         list.removeHead();
         return front;
     }
@@ -38,7 +38,7 @@ public:
         try{
             if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
-        T back = list.getTail()->val;
+        T back = list.getTail()->data;
         list.removeTail();
         return back;
     }
@@ -48,13 +48,13 @@ public:
         try{
             if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
-        return list.getHead()->val;
+        return list.getHead()->data;
     }
     const T& back() const override{
         try{
             if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         }catch(std::runtime_error& error){}
-        return list.getTail()->val;
+        return list.getTail()->data;
     }
 
     // Getter

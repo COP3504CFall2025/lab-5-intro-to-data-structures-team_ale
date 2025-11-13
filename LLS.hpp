@@ -20,9 +20,9 @@ public:
     // Deletion
     T pop() override{
         if (list.getHead() == nullptr) throw std::runtime_error("Empty Array");
-        //T data = list.getHead()->data;
+        T data = list.getHead()->data;
         list.removeHead();
-        return list.getHead()->data;
+        return data;
     }
 
     // Access

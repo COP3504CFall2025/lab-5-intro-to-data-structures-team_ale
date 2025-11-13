@@ -21,9 +21,9 @@ public:
     // Deletion
     T dequeue() override{
         if (list.getHead() == nullptr) throw std::runtime_error("Empty Array");
-        //T data = list.getTail()->data;
+        T data = list.getHead()->data;
         list.removeHead();
-        return list.getHead()->data;
+        return data;
     }
 
     // Access

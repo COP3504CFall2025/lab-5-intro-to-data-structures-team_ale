@@ -36,7 +36,7 @@ public:
         if (this == &other) return *this;
         delete[] data_;
         data_ = new T[other.capacity_];
-        for (std::size_t i = front_; i < front_ + size_ ; i++){
+        for (std::size_t i = other.front_; i < other.front_ + other.size_ ; i++){
             data_[i % other.capacity_] = other.data_[i % other.capacity_];
         }
         front_ = other.front_;
@@ -65,6 +65,8 @@ public:
         data_ = other.data_;
         size_ = other.size_;
         capacity_ = other.capacity_;
+        front_ = other.front_;
+        back_ = other.back_;
         other.data_ = nullptr;
         other.size_ = 0;
         other.capacity_ = 0;
@@ -120,7 +122,7 @@ public:
 
     // Deletion
     T popFront() override{
-        if (back_ == front_){
+        if (size_ == 0){
             throw std::runtime_error("Empty Array");
         }
         T val = data_[front_];
@@ -131,7 +133,7 @@ public:
         
     }
     T popBack() override{
-        if (back_ == front_){
+        if (size_ == 0){
             throw std::runtime_error("Empty Array");
         }
         T val = data_[back_ - 1];

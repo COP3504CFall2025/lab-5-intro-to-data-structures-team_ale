@@ -87,6 +87,16 @@ public:
         array_ = temp;
         capacity_ = newCap;
     }
+    void shrink(){
+        size_t newCap = capacity_ / scale_factor_;
+        T* temp = new T[newCap];
+        for (size_t i = 0; i < curr_size_; i++){
+            temp[i] = array_[i];
+        }
+        delete[] array_;
+        array_ = temp;
+        capacity_ = newCap;
+    }
     void push(const T& data) override{
         if (curr_size_ == capacity_) resize();
         T* temp = new T[capacity_];
@@ -104,20 +114,22 @@ public:
     }
 
     T peek() const override{
+        if (curr_size_ == 0) throw std::runtime_error("Empty Array");
         return array_[0];
     }
 
     T pop() override{
         if (curr_size_ == 0) throw std::runtime_error("Empty Array");
-        curr_size_--;
-        T val = array_[curr_size_ - 1];
+        if (curr_size_ == capacity_ / 2) shrink();
+        //T val = array_[curr_size_ - 1];
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_ - 1; i++){
-            temp[i] = array_[i + 1];
+            temp[i] = array_[i];
         }
         delete[] array_;
         array_ = temp;
-        return val;
+        curr_size_--;
+        return array_[0];
     }
     void printForward(){
         for (size_t i = 0; i < curr_size_; i++){

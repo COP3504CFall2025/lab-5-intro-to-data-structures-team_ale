@@ -86,6 +86,16 @@ public:
         array_ = temp;
         capacity_ *= 2;
     }
+    void shrink(){
+        size_t newCap = capacity_ / scale_factor_;
+        T* temp = new T[newCap];
+        for (size_t i = 0; i < curr_size_; i++){
+            temp[i] = array_[i];
+        }
+        delete[] array_;
+        array_ = temp;
+        capacity_ = newCap;
+    }
     // Insertion
     void enqueue(const T& data) override{
         if (curr_size_ == capacity_) resize();
@@ -95,13 +105,14 @@ public:
 
     // Access
     T peek() const override{
-        
+        if (curr_size_ == 0) throw std::runtime_error("Empty Array");
         return array_[0];
     }
 
     // Deletion
     T dequeue() override{
         if (curr_size_ == 0) throw std::runtime_error("Empty Array");
+        if (curr_size_ == capacity_ / 2) shrink();
         T val = array_[0];
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_ - 1; i++){
@@ -110,7 +121,7 @@ public:
         delete[] array_;
         array_ = temp;
         curr_size_--;
-        return val;
+        return array_[0];
         
     }
     void printForward(){

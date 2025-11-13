@@ -163,7 +163,7 @@ public:
 		count = 0;
 		Node();
 	}
-	LinkedList(const LinkedList<T>& list): head(nullptr), tail(nullptr), count(0){
+	LinkedList(const LinkedList<T>& list): Node(), head(nullptr), tail(nullptr), count(0){
 		Node* ptr = list.head;
 		while (ptr != nullptr){
 			addTail(ptr->data);

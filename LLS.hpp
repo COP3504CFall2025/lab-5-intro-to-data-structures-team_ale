@@ -19,16 +19,15 @@ public:
     }
     // Deletion
     T pop() override{
-        try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
-        T data = list.getHead()->data;
+        if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        //T data = list.getHead()->data;
         list.removeHead();
-        return data;
+        return list.getHead()->data;
     }
 
     // Access
     T peek() const override{
+        if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         return list.getHead()->data;
     }
 

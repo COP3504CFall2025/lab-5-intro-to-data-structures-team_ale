@@ -112,15 +112,11 @@ public:
 		if (head == nullptr){
 			return;
 		}
-		if (head->next == nullptr) delete head;
-		Node* temp_ptr = head->next;
+		Node* temp_ptr = head;
 		while (temp_ptr != nullptr){
-			delete temp_ptr->prev;
-			if (temp_ptr->next == nullptr){
-				delete temp_ptr;
-				temp_ptr = nullptr;
-			}
-			else temp_ptr = temp_ptr->next;
+			Node* tempy = temp_ptr->next;
+			delete temp_ptr;
+			temp_ptr = tempy;
 		}
         head = nullptr;
         tail = nullptr;
@@ -163,7 +159,7 @@ public:
 		count = 0;
 		Node();
 	}
-	LinkedList(const LinkedList<T>& list): Node(), head(nullptr), tail(nullptr), count(0){
+	LinkedList(const LinkedList<T>& list): head(nullptr), tail(nullptr), count(0){
 		Node* ptr = list.head;
 		while (ptr != nullptr){
 			addTail(ptr->data);

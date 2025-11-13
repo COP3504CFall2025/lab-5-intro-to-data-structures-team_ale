@@ -20,12 +20,10 @@ public:
 
     // Deletion
     T dequeue() override{
-        try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
-        T data = list.getTail()->data;
-        list.removeTail();
-        return data;
+        if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
+        //T data = list.getTail()->data;
+        list.removeHead();
+        return list.getHead->data;
     }
 
     // Access

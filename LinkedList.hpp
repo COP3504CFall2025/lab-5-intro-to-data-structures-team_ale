@@ -79,7 +79,7 @@ public:
 		Node* tmp_ptr = head;
 		head = head->next;
 		if (head != nullptr) head->prev = nullptr;
-		else tail == nullptr;
+		else tail = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;
@@ -90,7 +90,7 @@ public:
 		Node* tmp_ptr = tail;
 		tail = tail->prev;
 		if (tail != nullptr) tail->next = nullptr;
-		else head == nullptr;
+		else head = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;

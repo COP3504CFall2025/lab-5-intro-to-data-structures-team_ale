@@ -1,4 +1,4 @@
-#ifdef MAIN
+//#ifdef MAIN
 
 #include "ABS.hpp"
 #include "ABQ.hpp"
@@ -25,51 +25,50 @@ int main() {
     // std::cout << *tmp << " " << *arr << '\n';
     // delete tmp;
 
-    ABS<int> LL{};
+    LinkedList<int> LL{};
     LLQ<int> RR{};
     LLS<int> WW{};
     LLDQ<int> OO{};
     ABS<int> EE{};
     ABQ<int> QQ{};
-    LL.push(3);
-    LL.push(4);
-    LL.push(2);
-    LL.push(4);
-    LL.push(5);
-    LL.push(7);
-    LL.pop();
-    LL.pop();
-    LL.pop();
+    LL.addHead(3);
+    std::cout <<LL.getHead() << std::endl;
+    std::cout <<LL.getTail()<<"\n";
+    std::cout <<LL.getHead()->prev<<"\n";
+    LL.removeHead();
+    std::cout << LL.getHead() << std::endl;
+    std::cout << LL.getTail() << std::endl;
+
 
     LL.printForward();
-    ABS<int> FF{};
-    FF.push(45);
-    FF.push(12);
-    FF.push(3);
-    FF.push(11);
-    FF.push(74);
-    std::cout << FF.pop() << std::endl;
-    FF.pop();
-    FF.printForward();
-    std::cout << "Hello" << " " << LL.getSize() <<'\n';
-    ABS<int> BB{};
-    BB.push(4);
-    BB.push(6);
-    BB.push(3);
-    BB.push(9);
-    BB.push(7);
-    BB = LL;
-    BB.printForward();
-     std::cout << "This: " << LL.peek() << " " << LL.peek() << " " << '\n';
-    std::cout << "That: " << BB.peek() << " " << LL.peek() << " " <<  '\n';
-    ABS<int> CC = BB;
-    CC.printForward();
-    std::cout << "Hello" <<'\n';
-    ABS<int> DD = std::move(CC);
-    DD.printReverse();
+    // ABS<int> FF{};
+    // FF.push(45);
+    // FF.push(12);
+    // FF.push(3);
+    // FF.push(11);
+    // FF.push(74);
+    // std::cout << FF.pop() << std::endl;
+    // FF.pop();
+    // FF.printForward();
+    // std::cout << "Hello" << " " << LL.getSize() <<'\n';
+    // ABS<int> BB{};
+    // BB.push(4);
+    // BB.push(6);
+    // BB.push(3);
+    // BB.push(9);
+    // BB.push(7);
+    // BB = LL;
+    // BB.printForward();
+    //  std::cout << "This: " << LL.peek() << " " << LL.peek() << " " << '\n';
+    // std::cout << "That: " << BB.peek() << " " << LL.peek() << " " <<  '\n';
+    // ABS<int> CC = BB;
+    // CC.printForward();
+    // std::cout << "Hello" <<'\n';
+    // ABS<int> DD = std::move(CC);
+    // DD.printReverse();
 
 
     return 0;
 }
 
-#endif
+//#endif

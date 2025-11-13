@@ -76,29 +76,23 @@ public:
 	// Remodata
 	bool removeHead(){
 		if (head == nullptr) return false;
-		if (head->next == nullptr){
-			delete head;
-		}else{
-			Node* tmp_ptr = head;
-			head = head->next;
-			if (head != nullptr) head->prev = nullptr;
-			delete tmp_ptr;
-			tmp_ptr = nullptr;
-		}
+		Node* tmp_ptr = head;
+		head = head->next;
+		if (head != nullptr) head->prev = nullptr;
+		else tail == nullptr;
+		delete tmp_ptr;
+		tmp_ptr = nullptr;
 		count--;
 		return true;
 	}
 	bool removeTail(){
 		if (tail == nullptr) return false;
-		if (tail->prev == nullptr){
-			delete tail;
-		}else{
-			Node* tmp_ptr = tail;
-			tail = tail->prev;
-			if (tail != nullptr) tail->next = nullptr;
-			delete tmp_ptr;
-			tmp_ptr = nullptr;
-		}
+		Node* tmp_ptr = tail;
+		tail = tail->prev;
+		if (tail != nullptr) tail->next = nullptr;
+		else head == nullptr;
+		delete tmp_ptr;
+		tmp_ptr = nullptr;
 		count--;
 		return true;
 	}

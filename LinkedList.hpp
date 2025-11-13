@@ -117,6 +117,7 @@ public:
 		if (head == nullptr){
 			return;
 		}
+		if (head->next == nullptr) delete head;
 		Node* temp_ptr = head->next;
 		while (temp_ptr != nullptr){
 			delete temp_ptr->prev;

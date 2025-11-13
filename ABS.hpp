@@ -78,24 +78,29 @@ public:
 
     // Push item onto the stack
     void resize(){
-        T* temp = new T[capacity_ * scale_factor_];
-        for (size_t i = 0; i < capacity_; i++){
+        size_t newCap = capacity_ * scale_factor_;
+        T* temp = new T[newCap];
+        for (size_t i = 0; i < curr_size_; i++){
             temp[i] = array_[i];
         }
         delete[] array_;
         array_ = temp;
-        capacity_ *= 2;
+        capacity_ = newCap;
     }
     void push(const T& data) override{
-        curr_size_++;
-        if (curr_size_ > capacity_) resize();
+        if (curr_size_ == capacity_) resize();
         T* temp = new T[capacity_];
         temp[0] = data;
-        for (size_t i = 0; i < curr_size_; i++){
-            temp[i + 1] = array_[i];
+        size_t i = 1;
+        size_t j = 0;
+        while (j < curr_size_){
+            temp[i] = array_[j];
+            j++;
+            i++;
         }
         delete[] array_;
         array_ = temp;
+        curr_size_++;
     }
 
     T peek() const override{

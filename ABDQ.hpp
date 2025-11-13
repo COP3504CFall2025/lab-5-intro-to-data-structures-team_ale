@@ -134,7 +134,7 @@ public:
         if (back_ == front_){
             throw std::out_of_range("Empty Array");
         }
-        T val = data_[back_];
+        T val = data_[back_ - 1];
         back_ = (back_ - 1 + capacity_) % capacity_;
         size_--;
         if (size_ == (capacity_ / 2) - 1) shrinkIfNeeded();
@@ -144,13 +144,13 @@ public:
 
     // Access
     const T& front() const override{
-        if (back_ == front_){
+        if (size_ == 0){
             throw std::out_of_range("Empty Array");
         }
         return data_[front_];
     }
     const T& back() const override{
-        if (back_ == front_){
+        if (size_ == 0){
             throw std::out_of_range("Empty Array");
         }
         return data_[back_ - 1];

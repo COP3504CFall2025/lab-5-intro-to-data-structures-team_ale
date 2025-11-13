@@ -10,9 +10,9 @@ class LinkedList {
 private:
 // Stores pointers to first and last nodes and count
 	struct Node{
-		Node* previous;
+		Node* prev;
 		Node* next;
-		T val;
+		T data;
 	};
 	Node* head;
 	Node* tail;
@@ -22,15 +22,15 @@ public:
 	void printForward() const{
 		Node* temp_ptr = head;
 		while (temp_ptr != nullptr){
-			std::cout << temp_ptr->val << std::endl;
+			std::cout << temp_ptr->data << std::endl;
 			temp_ptr = temp_ptr->next;
 		}
 	}
 	void printReverse() const{
 		Node* temp_ptr = tail;
 		while (temp_ptr != nullptr){
-			std::cout << temp_ptr->val << std::endl;
-			temp_ptr = temp_ptr->previous;
+			std::cout << temp_ptr->data << std::endl;
+			temp_ptr = temp_ptr->prev;
 		}
 	}
 
@@ -54,34 +54,34 @@ public:
 	// Insertion
 	void addHead(const T& data){
 		Node* tmp_ptr = new Node();
-		tmp_ptr->val = data;
+		tmp_ptr->data = data;
 		if (head == nullptr){
 			head = tmp_ptr;
 			tail = tmp_ptr;
 		}else{
-			head->previous = tmp_ptr;
+			head->prev = tmp_ptr;
 			tmp_ptr->next = head;
-			tmp_ptr->previous = nullptr;
+			tmp_ptr->prev = nullptr;
 			head = tmp_ptr;
 		}
 		count++;
 	}
 	void addTail(const T& data){
 		Node* tmp_ptr = new Node();
-		tmp_ptr->val = data;
+		tmp_ptr->data = data;
 		if (tail == nullptr){
 			head = tmp_ptr;
 			tail = tmp_ptr;
 		}else{
 			tail->next = tmp_ptr;
-			tmp_ptr->previous = tail;
+			tmp_ptr->prev = tail;
 			tmp_ptr->next = nullptr;
 			tail = tmp_ptr;
 		}
 		count++;
 	}
 
-	// Removal
+	// Remodata
 	void removeHead(){
 		try{
             if (head == nullptr) throw std::runtime_error("Empty Array");
@@ -93,7 +93,7 @@ public:
 		}
 		Node* tmp_ptr = head;
 		head = head->next;
-		head->previous = nullptr;
+		head->prev = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;
@@ -108,7 +108,7 @@ public:
 			tail = nullptr;
 		}
 		Node* tmp_ptr = tail;
-		tail = tail->previous;
+		tail = tail->prev;
 		tail->next = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
@@ -120,7 +120,7 @@ public:
 		}
 		Node* temp_ptr = head->next;
 		while (temp_ptr != nullptr){
-			delete temp_ptr->previous;
+			delete temp_ptr->prev;
 			if (temp_ptr->next == nullptr){
 				delete temp_ptr;
 				temp_ptr = nullptr;
@@ -154,7 +154,7 @@ public:
         this->Clear();
         Node* ptr = rhs.head;
 		while (ptr != nullptr){
-			addTail(ptr->val);
+			addTail(ptr->data);
 			ptr = ptr->next;
 		}
 		return *this;
@@ -170,7 +170,7 @@ public:
 	LinkedList(const LinkedList<T>& list): head(nullptr), tail(nullptr), count(0){
 		Node* ptr = list.head;
 		while (ptr != nullptr){
-			addTail(ptr->val);
+			addTail(ptr->data);
 			ptr = ptr->next;
 		}
 
@@ -190,7 +190,7 @@ public:
 			ptr = ptr->next;
 			pos++;
 		}
-		return ptr->val;
+		return ptr->data;
 	}
 
 	~LinkedList(){

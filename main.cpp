@@ -1,8 +1,8 @@
-#ifdef MAIN
+//#ifdef MAIN
 
 #include "ABS.hpp"
 #include "ABQ.hpp"
-#include "ABS.hpp"
+#include "ABDQ.hpp"
 #include "Interfaces.hpp"
 #include "LinkedList.hpp"
 #include "LLDQ.hpp"
@@ -25,17 +25,19 @@ int main() {
     // std::cout << *tmp << " " << *arr << '\n';
     // delete tmp;
 
-    LLQ<int> LL{};
-    LLQ<int> RR{};
+    ABS<int> LL{};
+    ABS<int> RR{};
     LLS<int> WW{};
     LLDQ<int> OO{};
     ABS<int> EE{};
     ABQ<int> QQ{};
-    LL.enqueue(3);
+    LL.push(3);
     std::cout <<LL.peek() << std::endl;
+    LL.push(4);
     std::cout <<LL.peek()<<"\n";
     std::cout <<LL.peek()<<"\n";
-    LL.dequeue();
+    std::cout << LL.pop() << std::endl;
+    std::cout << LL.pop() << std::endl;
     std::cout << LL.peek() << std::endl;
     std::cout << LL.peek() << std::endl;
 
@@ -64,11 +66,11 @@ int main() {
     // ABS<int> CC = BB;
     // CC.printForward();
     // std::cout << "Hello" <<'\n';
-    LLQ<int> DD = std::move(LL);
+    ABS<int> DD = std::move(LL);
     // DD.printReverse();
 
 
     return 0;
 }
 
-#endif
+//#endif

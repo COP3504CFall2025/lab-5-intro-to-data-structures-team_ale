@@ -124,7 +124,7 @@ public:
         T val = array_[0];
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_ - 1; i++){
-            temp[i] = array_[i];
+            temp[i] = array_[i + 1];
         }
         delete[] array_;
         array_ = temp;

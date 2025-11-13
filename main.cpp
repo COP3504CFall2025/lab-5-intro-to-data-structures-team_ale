@@ -1,4 +1,4 @@
-#ifdef MAIN
+//#ifdef MAIN
 
 #include "ABS.hpp"
 #include "ABQ.hpp"
@@ -25,19 +25,19 @@ int main() {
     // std::cout << *tmp << " " << *arr << '\n';
     // delete tmp;
 
-    LinkedList<int> LL{};
+    LLQ<int> LL{};
     LLQ<int> RR{};
     LLS<int> WW{};
     LLDQ<int> OO{};
     ABS<int> EE{};
     ABQ<int> QQ{};
-    LL.addHead(3);
-    std::cout <<LL.getHead() << std::endl;
-    std::cout <<LL.getTail()<<"\n";
-    std::cout <<LL.getHead()->prev<<"\n";
-    LL.removeHead();
-    std::cout << LL.getHead() << std::endl;
-    std::cout << LL.getTail() << std::endl;
+    LL.enqueue(3);
+    std::cout <<LL.peek() << std::endl;
+    std::cout <<LL.peek()<<"\n";
+    std::cout <<LL.peek()<<"\n";
+    LL.dequeue();
+    std::cout << LL.peek() << std::endl;
+    std::cout << LL.peek() << std::endl;
 
 
     LL.printForward();
@@ -64,11 +64,11 @@ int main() {
     // ABS<int> CC = BB;
     // CC.printForward();
     // std::cout << "Hello" <<'\n';
-    // ABS<int> DD = std::move(CC);
+    LLQ<int> DD = std::move(LL);
     // DD.printReverse();
 
 
     return 0;
 }
 
-#endif
+//#endif

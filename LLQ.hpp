@@ -28,6 +28,7 @@ public:
 
     // Access
     T peek() const override{
+        if (list.getTail() == nullptr) throw std::runtime_error("Empty Array");
         return list.getTail()->data;
     }
 

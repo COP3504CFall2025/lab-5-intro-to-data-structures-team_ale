@@ -23,7 +23,7 @@ public:
     explicit ABDQ(std::size_t capacity): data_(new T[capacity]), capacity_(capacity), size_(0), front_(0), back_(0){}
     ABDQ(const ABDQ& other) {
         data_ = new T[other.capacity_];
-        for (std::size_t i = front_; i < front_ + size_ ; i++){
+        for (std::size_t i = other.front_; i < other.front_ + other.size_ ; i++){
             data_[i % other.capacity_] = other.data_[i % other.capacity_];
         }
         front_ = other.front_;
@@ -121,7 +121,7 @@ public:
     // Deletion
     T popFront() override{
         if (back_ == front_){
-            throw std::out_of_range("Empty Array");
+            throw std::runtime_error("Empty Array");
         }
         T val = data_[front_];
         front_ = (front_ + 1) % capacity_;
@@ -132,7 +132,7 @@ public:
     }
     T popBack() override{
         if (back_ == front_){
-            throw std::out_of_range("Empty Array");
+            throw std::runtime_error("Empty Array");
         }
         T val = data_[back_ - 1];
         back_ = (back_ - 1 + capacity_) % capacity_;
@@ -145,13 +145,13 @@ public:
     // Access
     const T& front() const override{
         if (size_ == 0){
-            throw std::out_of_range("Empty Array");
+            throw std::runtime_error("Empty Array");
         }
         return data_[front_];
     }
     const T& back() const override{
         if (size_ == 0){
-            throw std::out_of_range("Empty Array");
+            throw std::runtime_error("Empty Array");
         }
         return data_[back_ - 1];
     }

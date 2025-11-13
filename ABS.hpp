@@ -103,9 +103,7 @@ public:
     }
 
     T pop() override{
-        try{
-            if (curr_size_ == 0) throw std::out_of_range("Empty Array");
-        }catch(std::out_of_range& error){}
+        if (curr_size_ == 0) throw std::runtime_error("Empty Array");
         curr_size_--;
         T val = array_[curr_size_ - 1];
         T* temp = new T[capacity_];

@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <iostream>
 #include "Interfaces.hpp"
 
 // Technically bad, but size_t isn't likely to conflict with any client code.
@@ -43,7 +44,7 @@ public:
         array_ = other.array_;
         curr_size_ = other.curr_size_;
         capacity_ = other.capacity_;
-        other.array = nullptr;
+        other.array_ = nullptr;
         other.curr_size_ = 0;
         other.capacity_ = 0;
 

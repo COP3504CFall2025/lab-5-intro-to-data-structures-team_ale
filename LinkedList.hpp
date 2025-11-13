@@ -91,7 +91,8 @@ public:
 		}
 		Node* tmp_ptr = head;
 		head = head->next;
-		head->prev = nullptr;
+		delete head->prev;
+		head = nullptr;
 		delete tmp_ptr;
 		tmp_ptr = nullptr;
 		count--;
@@ -112,7 +113,7 @@ public:
 		count--;
 		return true;
 	}
-	void Clear(){
+	void clear(){
 		if (head == nullptr){
 			return;
 		}
@@ -136,7 +137,7 @@ public:
 		if (this == &other || other.head == nullptr){
 			return *this;
 		}
-        this->Clear();
+        this->clear();
         head = other.head;
         tail = other.tail;
         count = other.count;
@@ -149,7 +150,7 @@ public:
 		if (this == &rhs || rhs.head == nullptr){
 			return *this;
 		}
-        this->Clear();
+        this->clear();
         Node* ptr = rhs.head;
 		while (ptr != nullptr){
 			addTail(ptr->data);
@@ -192,7 +193,7 @@ public:
 	}
 
 	~LinkedList(){
-		Clear();
+		clear();
 	}
 
 };

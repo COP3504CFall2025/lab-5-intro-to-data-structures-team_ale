@@ -27,9 +27,7 @@ public:
 
     // Core Remodata Operations
     T popFront() override{
-        try{
-            if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
-        }catch(std::runtime_error& error){}
+        if (list.getHead() == list.getTail()) throw std::runtime_error("Empty Array");
         T front = list.getHead()->data;
         list.removeHead();
         return front;
